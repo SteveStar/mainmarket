@@ -2,9 +2,18 @@ package ca.humber.cpan228.mainmarket.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import lombok.*;
+
 import java.time.LocalDateTime;
 
+
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+
 public class Product {
 
     @Id
@@ -50,3 +59,4 @@ public class Product {
     }
 
 }
+

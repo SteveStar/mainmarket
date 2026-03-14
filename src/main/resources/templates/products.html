@@ -84,8 +84,11 @@
         <ul class="pagination">
 
             <li class="page-item" th:classappend="${productPage.first} ? 'disabled'">
-                <a class="page-link"
-                   th:href="@{/products(page=${productPage.number - 1})}">
+                <a class="page-link" th:if="${!productPage.first}"
+                   th:href="@{/products(page=${productPage.number - 1}, categoryId=${selectedCategoryId}, brandId=${selectedBrandId}, sortBy=${sortBy}, direction=${direction})}">
+                    Previous
+                </a>
+                <a class="page-link" th:if="${productPage.first}" href="#" tabindex="-1" aria-disabled="true">
                     Previous
                 </a>
             </li>
@@ -93,12 +96,15 @@
             <li class="page-item" th:each="i : ${#numbers.sequence(0, productPage.totalPages - 1)}"
                 th:classappend="${i == productPage.number} ? 'active'">
                 <a class="page-link" th:text="${i + 1}"
-                   th:href="@{/products(page=${i})}"></a>
+                   th:href="@{/products(page=${i}, categoryId=${selectedCategoryId}, brandId=${selectedBrandId}, sortBy=${sortBy}, direction=${direction})}"></a>
             </li>
 
             <li class="page-item" th:classappend="${productPage.last} ? 'disabled'">
-                <a class="page-link"
-                   th:href="@{/products(page=${productPage.number + 1})}">
+                <a class="page-link" th:if="${!productPage.last}"
+                   th:href="@{/products(page=${productPage.number + 1}, categoryId=${selectedCategoryId}, brandId=${selectedBrandId}, sortBy=${sortBy}, direction=${direction})}">
+                    Next
+                </a>
+                <a class="page-link" th:if="${productPage.last}" href="#" tabindex="-1" aria-disabled="true">
                     Next
                 </a>
             </li>
