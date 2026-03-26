@@ -4,6 +4,7 @@ import ca.humber.cpan228.mainmarket.entity.Product;
 import ca.humber.cpan228.mainmarket.repository.*;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.*;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -67,6 +68,7 @@ public class ProductController {
     }
 
     @GetMapping("/new")
+    @PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
     public String showCreateForm(Model model) {
         model.addAttribute("product", new Product());
         model.addAttribute("categories", categoryRepository.findAll());
@@ -75,6 +77,7 @@ public class ProductController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
     public String createProduct(
             @Valid @ModelAttribute("product") Product product,
             BindingResult bindingResult,
